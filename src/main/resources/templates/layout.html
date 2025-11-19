@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title} ?: 'Gestion Scolaire'">Gestion Scolaire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+<!-- Navigation -->
+<nav class="bg-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex">
+                <div class="flex-shrink-0 flex items-center">
+                    <h1 class="text-2xl font-bold text-indigo-600">Gestion Scolaire</h1>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a th:href="@{/classes}"
+                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                       th:classappend="${#httpServletRequest.requestURI.contains('classes')} ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'">
+                        Classes
+                    </a>
+                    <a th:href="@{/eleves}"
+                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                       th:classappend="${#httpServletRequest.requestURI.contains('eleves')} ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'">
+                        Élèves
+                    </a>
+                    <a th:href="@{/enseignants}"
+                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                       th:classappend="${#httpServletRequest.requestURI.contains('enseignants')} ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'">
+                        Enseignants
+                    </a>
+                    <a th:href="@{/absences}"
+                       class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                       th:classappend="${#httpServletRequest.requestURI.contains('absences')} ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'">
+                        Absences
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div th:replace="${content}"></div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-white mt-12">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <p class="text-center text-gray-500 text-sm">
+            © 2024 Gestion Scolaire
+        </p>
+    </div>
+</footer>
+</body>
+</html>

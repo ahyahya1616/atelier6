@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Absence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+<!-- Navigation -->
+<nav class="bg-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex">
+                <div class="flex-shrink-0 flex items-center">
+                    <h1 class="text-2xl font-bold text-indigo-600">Gestion Scolaire</h1>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a th:href="@{/classes}" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Classes</a>
+                    <a th:href="@{/eleves}" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Élèves</a>
+                    <a th:href="@{/enseignants}" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Enseignants</a>
+                    <a th:href="@{/absences}" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Absences</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="max-w-3xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="px-4 py-6 sm:px-0">
+        <div class="mb-6">
+            <h2 class="text-3xl font-bold text-gray-900"
+                th:text="${absence.id != null ? 'Modifier l''absence' : 'Ajouter une absence'}"></h2>
+        </div>
+
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <form th:action="@{/absences/save}" th:object="${absence}" method="post">
+                <input type="hidden" th:field="*{id}" />
+
+                <!-- Sélection Élève -->
+                <div class="mb-4">
+                    <label for="eleve" class="block text-sm font-medium text-gray-700 mb-2">Élève</label>
+                    <select id="eleve"
+                            th:field="*{eleve.id}"
+                            required
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="">Sélectionner un élève</option>
+                        <option th:each="eleve : ${eleves}"
+                                th:value="${eleve.id}"
+                                th:text="${eleve.nom + ' ' + eleve.prenom}">
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Date -->
+                <div class="mb-4">
+                    <label for="date" class="block text-sm font-medium text-gray-700 mb-2">Date de l'absence</label>
+                    <input type="date"
+                           id="date"
+                           th:field="*{date}"
+                           required
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+
+                <div class="flex justify-end space-x-3">
+                    <a th:href="@{/absences}" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition duration-200">
+                        Annuler
+                    </a>
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-200">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>
