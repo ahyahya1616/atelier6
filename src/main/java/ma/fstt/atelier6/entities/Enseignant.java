@@ -3,6 +3,7 @@ package ma.fstt.atelier6.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,5 +25,5 @@ public class Enseignant {
             joinColumns = @JoinColumn(name = "enseignant_id"),
             inverseJoinColumns = @JoinColumn(name = "classe_id")
     )
-    private List<Classe> classes;
+    private List<Classe> classes  = new ArrayList<>();;
 }
